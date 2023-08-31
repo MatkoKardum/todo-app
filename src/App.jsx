@@ -46,28 +46,24 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 p-24 min-h-screen bg-violet-500 text-white">
-      <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-lg bg-indigo-950">
+    <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
+      <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
         <div className="w-full">
           <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
           <div className="flex justify-center  items-center gap-2 w-full p-2">
             <input
               type="text"
               placeholder="Enter a new task!"
-              className="w-full p-2 rounded-md text-black"
+              className="w-full p-2 rounded-md text-black border-2 border-green-200 outline-green-200"
               value={newTask}
               ref={inputElement}
               onChange={(e) => setNewTask(e.target.value)}
             />
             <button
-              className="w-1/3 rounded-md bg-violet-500 p-2 font-semibold"
+              className="w-1/3 rounded-md bg-green-200 p-2 font-semibold text-green-700"
               onClick={() => {
                 if (newTask) {
                   if (editing) {
-                    // setTasks((prevTasks) => [
-                    //   ...prevTasks,
-                    //   { id: uuidv4(), value: newTask },
-                    // ]);
                     setTasks((prevTask) => {
                       const beze = prevTask.find(
                         (task) => task.id === editingId
@@ -101,8 +97,6 @@ const App = () => {
           <Todo
             tasks={tasks}
             setTasks={setTasks}
-            editing={editing}
-            setEditing={setEditing}
             editTask={editTask}
             deleteTask={deleteTask}
             completeTask={completeTask}
