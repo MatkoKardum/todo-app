@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import EditOverlay from "./EditOverlay";
 
 const EditTask = ({
@@ -7,8 +7,9 @@ const EditTask = ({
   editingTaskId,
   editingTask,
   setTasks,
-  inputElement,
 }) => {
+  const inputElement = useRef();
+
   useEffect(() => {
     inputElement.current.focus();
   }, [inputElement]);

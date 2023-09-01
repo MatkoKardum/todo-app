@@ -12,7 +12,6 @@ const App = () => {
   const [editingTask, setEditingTask] = useState("");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editing, setEditing] = useState(false);
-  const inputElement = useRef();
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -43,19 +42,21 @@ const App = () => {
   return (
     <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
       <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
-        <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
-        <TaskForm
-          newTask={newTask}
-          setNewTask={setNewTask}
-          setTasks={setTasks}
-        />
+        <div className="w-full">
+          <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
+          <TaskForm
+            newTask={newTask}
+            setNewTask={setNewTask}
+            setTasks={setTasks}
+          />
 
-        <TaskList
-          tasks={tasks}
-          enableEditTask={enableEditTask}
-          completeTask={completeTask}
-          deleteTask={deleteTask}
-        />
+          <TaskList
+            tasks={tasks}
+            enableEditTask={enableEditTask}
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+          />
+        </div>
       </div>
 
       {editing && (
@@ -65,7 +66,6 @@ const App = () => {
           editingTaskId={editingTaskId}
           editingTask={editingTask}
           setTasks={setTasks}
-          inputElement={inputElement}
         />
       )}
     </div>

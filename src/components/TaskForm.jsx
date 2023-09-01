@@ -1,6 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
+import { useEffect, useRef } from "react";
 
 const TaskForm = ({ newTask, setNewTask, setTasks }) => {
+  const inputElement = useRef();
+
+  useEffect(() => {
+    inputElement.current.focus();
+  }, [inputElement]);
+
   return (
     <form className="w-full flex justify-center items-center gap-2 p-2">
       <input
@@ -8,6 +15,7 @@ const TaskForm = ({ newTask, setNewTask, setTasks }) => {
         placeholder="Enter a new task!"
         className="w-full p-2 rounded-md text-black border-2 border-green-200 outline-green-200"
         value={newTask}
+        ref={inputElement}
         onChange={(e) => setNewTask(e.target.value)}
       />
       <button
