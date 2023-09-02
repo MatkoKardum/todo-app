@@ -2,7 +2,7 @@ import Task from "./Task";
 
 const TaskList = ({ tasks, enableEditTask, completeTask, deleteTask }) => {
   return (
-    <div className="flex gap-2 flex-wrap mt-2 max-h-[500px] overflow-auto p-2 text-2xl">
+    <div className="flex gap-2 flex-wrap mt-2 max-h-[450px] overflow-auto p-2 text-2xl">
       {tasks.map((task) => (
         <Task
           task={task}

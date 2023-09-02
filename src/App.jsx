@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import TaskList from "./components/TaskList";
 import EditTask from "./components/EditTask";
 import TaskForm from "./components/TaskForm";
+import ClearTasks from "./components/ClearTasks";
+import TasksFilter from "./components/TasksFilter";
 
 const App = () => {
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) ?? []
   );
+  const [displayTasks, setDisplayTask] = useState(tasks);
 
   const [newTask, setNewTask] = useState("");
   const [editingTask, setEditingTask] = useState("");
@@ -15,6 +18,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    setDisplayTask(tasks);
   }, [tasks]);
 
   const enableEditTask = (taskId) => {
@@ -42,7 +46,7 @@ const App = () => {
   return (
     <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
       <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
-        <div className="w-full">
+        <div className="flex flex-col gap-2 w-full">
           <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
           <TaskForm
             newTask={newTask}
@@ -50,12 +54,26 @@ const App = () => {
             setTasks={setTasks}
           />
 
-          <TaskList
+          <TasksFilter
             tasks={tasks}
-            enableEditTask={enableEditTask}
-            completeTask={completeTask}
-            deleteTask={deleteTask}
+            displayTasks={displayTasks}
+            setDisplayTask={setDisplayTask}
           />
+
+          {!tasks.length ? (
+            <h2 className="font-medium text-center pt-4 text-xl">
+              Your List is Empty!
+            </h2>
+          ) : (
+            <TaskList
+              tasks={displayTasks}
+              enableEditTask={enableEditTask}
+              completeTask={completeTask}
+              deleteTask={deleteTask}
+            />
+          )}
+
+          {tasks.length >= 3 && <ClearTasks setTasks={setTasks} />}
         </div>
       </div>
 
