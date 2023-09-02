@@ -9,7 +9,8 @@ const App = () => {
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) ?? []
   );
-  const [displayTasks, setDisplayTask] = useState(tasks);
+  const [displayTasks, setDisplayTask] = useState([]);
+  const [filter, setFilter] = useState("");
 
   const [newTask, setNewTask] = useState("");
   const [editingTask, setEditingTask] = useState("");
@@ -18,8 +19,21 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    setDisplayTask(tasks);
-  }, [tasks]);
+
+    switch (filter) {
+      case "all":
+        setDisplayTask(tasks);
+        break;
+      case "completed":
+        setDisplayTask(tasks.filter((task) => task.completed));
+        break;
+      case "uncompleted":
+        setDisplayTask(tasks.filter((task) => !task.completed));
+        break;
+      default:
+        setDisplayTask(tasks);
+    }
+  }, [tasks, filter]);
 
   const enableEditTask = (taskId) => {
     setEditing(true);
@@ -43,6 +57,18 @@ const App = () => {
     });
   };
 
+  const handleAll = () => {
+    setFilter("all");
+  };
+
+  const handleCompleted = () => {
+    setFilter("completed");
+  };
+
+  const handleUncompleted = () => {
+    setFilter("uncompleted");
+  };
+
   return (
     <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
       <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
@@ -55,9 +81,9 @@ const App = () => {
           />
 
           <TasksFilter
-            tasks={tasks}
-            displayTasks={displayTasks}
-            setDisplayTask={setDisplayTask}
+            handleAll={handleAll}
+            handleCompleted={handleCompleted}
+            handleUncompleted={handleUncompleted}
           />
 
           {!tasks.length ? (
