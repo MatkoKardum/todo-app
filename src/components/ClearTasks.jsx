@@ -1,6 +1,19 @@
-const ClearTasks = ({ setTasks }) => {
+const ClearTasks = ({ setTasks, filter }) => {
   const handleButton = () => {
-    setTasks([]);
+    switch (filter) {
+      case "all":
+        setTasks([]);
+        break;
+      case "completed":
+        setTasks((prevTasks) => prevTasks.filter((task) => !task.completed));
+        break;
+      case "uncompleted":
+        setTasks((prevTasks) => prevTasks.filter((task) => task.completed));
+        break;
+      default:
+        setTasks([]);
+        break;
+    }
   };
 
   return (

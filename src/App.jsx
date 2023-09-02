@@ -99,7 +99,9 @@ const App = () => {
             />
           )}
 
-          {displayTasks.length >= 2 && <ClearTasks setTasks={setTasks} />}
+          {displayTasks.length >= 2 && (
+            <ClearTasks setTasks={setTasks} filter={filter} />
+          )}
         </div>
       </div>
 
