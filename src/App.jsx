@@ -4,6 +4,7 @@ import EditTask from "./components/EditTask";
 import TaskForm from "./components/TaskForm";
 import ClearTasks from "./components/ClearTasks";
 import TasksFilter from "./components/TasksFilter";
+import AuthorLinks from "./components/AuthorLinks";
 
 const App = () => {
   const [tasks, setTasks] = useState(
@@ -70,50 +71,53 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
-      <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
-        <div className="flex flex-col gap-2 w-full">
-          <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
-          <TaskForm
-            newTask={newTask}
-            setNewTask={setNewTask}
+    <div>
+      <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
+        <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
+          <div className="flex flex-col gap-2 w-full">
+            <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
+            <TaskForm
+              newTask={newTask}
+              setNewTask={setNewTask}
+              setTasks={setTasks}
+            />
+
+            <TasksFilter
+              handleAll={handleAll}
+              handleCompleted={handleCompleted}
+              handleUncompleted={handleUncompleted}
+            />
+
+            {!displayTasks.length ? (
+              <span className="font-medium text-center my-8 text-2xl">
+                Empty List ❌
+              </span>
+            ) : (
+              <TaskList
+                tasks={displayTasks}
+                enableEditTask={enableEditTask}
+                completeTask={completeTask}
+                deleteTask={deleteTask}
+              />
+            )}
+
+            {displayTasks.length >= 2 && (
+              <ClearTasks setTasks={setTasks} filter={filter} />
+            )}
+          </div>
+        </div>
+
+        {editing && (
+          <EditTask
+            setEditing={setEditing}
+            setEditingTask={setEditingTask}
+            editingTaskId={editingTaskId}
+            editingTask={editingTask}
             setTasks={setTasks}
           />
-
-          <TasksFilter
-            handleAll={handleAll}
-            handleCompleted={handleCompleted}
-            handleUncompleted={handleUncompleted}
-          />
-
-          {!displayTasks.length ? (
-            <span className="font-medium text-center my-8 text-2xl">
-              Empty List ❌
-            </span>
-          ) : (
-            <TaskList
-              tasks={displayTasks}
-              enableEditTask={enableEditTask}
-              completeTask={completeTask}
-              deleteTask={deleteTask}
-            />
-          )}
-
-          {displayTasks.length >= 2 && (
-            <ClearTasks setTasks={setTasks} filter={filter} />
-          )}
-        </div>
+        )}
       </div>
-
-      {editing && (
-        <EditTask
-          setEditing={setEditing}
-          setEditingTask={setEditingTask}
-          editingTaskId={editingTaskId}
-          editingTask={editingTask}
-          setTasks={setTasks}
-        />
-      )}
+      <AuthorLinks />
     </div>
   );
 };
