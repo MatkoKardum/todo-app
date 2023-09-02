@@ -86,10 +86,10 @@ const App = () => {
             handleUncompleted={handleUncompleted}
           />
 
-          {!tasks.length ? (
-            <h2 className="font-medium text-center pt-4 text-xl">
-              Your List is Empty!
-            </h2>
+          {!displayTasks.length ? (
+            <span className="font-medium text-center my-8 text-2xl">
+              Empty List ❌
+            </span>
           ) : (
             <TaskList
               tasks={displayTasks}
@@ -99,7 +99,7 @@ const App = () => {
             />
           )}
 
-          {tasks.length >= 2 && <ClearTasks setTasks={setTasks} />}
+          {displayTasks.length >= 2 && <ClearTasks setTasks={setTasks} />}
         </div>
       </div>
 

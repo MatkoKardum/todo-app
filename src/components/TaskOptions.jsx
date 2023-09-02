@@ -7,17 +7,17 @@ const TaskOptions = ({ task, enableEditTask, completeTask, deleteTask }) => {
     <div className="flex gap-5">
       <BiEdit
         onClick={() => enableEditTask(task.id)}
-        className="rounded-full bg-green-200 text-green-500 p-2 text-4xl"
+        className="rounded-full bg-green-200 text-green-500 p-2 text-4xl hover:cursor-pointer"
       />
 
       <AiFillCheckCircle
         onClick={() => completeTask(task.id)}
-        className="rounded-full bg-green-200 text-green-500 p-2 text-4xl"
+        className="rounded-full bg-green-200 text-green-500 p-2 text-4xl hover:cursor-pointer"
       />
 
       <AiFillDelete
         onClick={() => deleteTask(task.id)}
-        className="rounded-full bg-red-200 text-red-500 p-2 text-4xl"
+        className="rounded-full bg-red-200 text-red-500 p-2 text-4xl hover:cursor-pointer"
       />
     </div>
   );
