@@ -73,7 +73,7 @@ const App = () => {
   return (
     <div>
       <div className="flex flex-col items-center gap-8 p-24 min-h-screen text-black">
-        <div className="flex flex-col items-center p-6 min-w-[700px] max-w-[700px] rounded-md drop-shadow-2xl bg-white">
+        <div className="flex flex-col items-center p-6 lg:min-w-[700px] lg:max-w-[700px] md:max-w-[500px] md:min-w-[500px] rounded-md drop-shadow-2xl bg-white">
           <div className="flex flex-col gap-2 w-full">
             <h1 className="text-6xl text-center font-bold mb-8">Todo App</h1>
             <TaskForm
